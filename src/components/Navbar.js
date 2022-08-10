@@ -1,15 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export class Navbar extends Component {
+function Navbar (props) {
 
  
-  render() {
     return (
-      <nav className="navbar navbar-expand-lg bg-light" >
+      <nav className={`navbar fixed-top navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}  >
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            {this.props.title}
+          <Link className="navbar-brand" style={{color:props.mode==='light' ? '#0d6efd' : 'whitesmoke', cursor:"pointer"}} to="/">
+            {props.title}
           </Link>
           <button
             className="navbar-toggler"
@@ -25,7 +24,7 @@ export class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/">
+                <Link className="nav-link" style={{color:props.mode==='light' ? '#000' : 'whitesmoke', fontWeight:500}} aria-current="page" to="/">
                   Home
                 </Link>
               </li>
@@ -46,6 +45,7 @@ export class Navbar extends Component {
                 className="form-check-input"
                 type="checkbox"
                 id="flexSwitchCheckDefault"
+                onClick={props.toggleMode}
                 style={{cursor:'pointer'}}
               />
               <label
@@ -54,8 +54,8 @@ export class Navbar extends Component {
               ></label>
             </div>
             <div  style={{marginRight:"15px"}}>
-            <span className="material-symbols-outlined" >dark_mode</span>
-            {/* style={{color:props.mode==='light'?'blue':'black'}} */}
+            <span className="material-symbols-outlined" style={{color:props.mode==='light'?'black':'rgb(33 37 41)'}} >dark_mode</span>
+            
             </div>
           </div>
 
@@ -63,7 +63,6 @@ export class Navbar extends Component {
         </div>
       </nav>
     );
-  }
 }
 
 export default Navbar;
